@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nevena Mitrović</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FAFAF8;
+      --black: #111110;
+      --mid: #6B6B68;
+      --light: #E8E6E0;
+      --accent: #111110;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--light);
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .hero {
+      padding: 9rem 3rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding-top: 0;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin: 0;
+      align-self: flex-start;
+    }
+
+    .hero-right {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: auto;
+    }
+
+    .hero-right p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #444;
+      max-width: 360px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 em {
+      font-style: italic;
+      color: var(--mid);
+    }
+    .hero-image {
+      width: 440px;
+      height: 440px;
+      margin-bottom: 1.5rem;
+      border: 0.5px solid var(--light);
+      background: #F0EDE6;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-right { padding-bottom: 0.5rem; }
+    .hero-right p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #444;
+      max-width: 360px;
+      margin-bottom: 1.5rem;
+    }
+
+    .application-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem 5rem;
+    }
+    .application-bar-inner {
+      border: 0.5px solid var(--black);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .application-bar-inner span {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .application-bar-inner strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+      border-top: 0.5px solid var(--light);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .section-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #555;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-wrap { 
+      position: relative; 
+      margin: 0 -1rem;
+      padding: 0 1rem;
+    }
+    .gallery {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      cursor: grab;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
+    }
+    .gallery.active { cursor: grabbing; }
+    .gallery::-webkit-scrollbar { display: none; }
+    .gallery-item { 
+      flex: 0 0 auto; 
+      scroll-snap-align: start; 
+      min-width: 340px;
+    }
+    .gallery-item img {
+      display: block;
+      height: 440px;
+      width: 100%;
+      object-fit: cover;
+      border: 0.5px solid var(--light);
+    }
+    .gallery-item.placeholder {
+      height: 440px;
+      width: 340px;
+      background: #F0EDE6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 0.5px dashed #ccc;
+    }
+    .gallery-item.placeholder span {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #bbb;
+    }
+    .gallery-item.placeholder .plus {
+      font-size: 1.8rem;
+      color: #ccc;
+      font-weight: 200;
+    }
+    .gallery-caption {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 0.6rem;
+    }
+
+    /* GALERIJA STRELICE */
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(250,250,248,0.9);
+      backdrop-filter: blur(8px);
+      border: 0.5px solid var(--light);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 10;
+      font-size: 1rem;
+      color: var(--mid);
+      user-select: none;
+    }
+    .gallery-nav:hover {
+      background: var(--white);
+      color: var(--black);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .gallery-nav.prev { left: 10px; }
+    .gallery-nav.next { right: 10px; }
+    .gallery-nav.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: translateY(-50%) scale(0.9);
+    }
+    .gallery-nav.disabled:hover {
+      background: rgba(250,250,248,0.9);
+      color: var(--mid);
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #333;
+    }
+    .about-text p + p { margin-top: 1.2rem; }
+
+    .about-facts .fact-row {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0;
+      border-bottom: 0.5px solid var(--light);
+    }
+    .about-facts .fact-row:first-child { border-top: 0.5px solid var(--light); }
+    .fact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.3rem;
+    }
+    .fact-value { font-size: 0.9rem; }
+
+    .contact-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      border-top: 0.5px solid var(--light);
+    }
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+    }
+    .contact-right { text-align: right; }
+    .contact-email {
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      border-bottom: 0.5px solid var(--black);
+      padding-bottom: 2px;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .contact-email:hover { color: var(--mid); }
+    .skills-note {
+      font-size: 0.72rem;
+      color: var(--mid);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 0.5px solid var(--light);
+      padding: 1.5rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      color: var(--mid);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .about-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      nav, section, .hero, .application-bar, .contact-section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .hero { padding-top: 9rem; }
+      .gallery-item img, .gallery-item.placeholder { height: 320px; }
+      .gallery-item, .gallery-item.placeholder { min-width: 260px; }
+      .gallery-nav { width: 36px; height: 36px; font-size: 0.9rem; }
+      .hero-image { width: 340px; height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-name">Nevena Mitrović</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#jewelry">Jewelry</a>
+      <a href="#clay">Clay</a>
+      <a href="#textile">Textile</a>
+      <a href="#posters">Posters</a>
+      <a href="#other">Designs</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-image">
+        <img src="jaaa.jpg" alt="Nevena Mitrović portrait">
+      </div>
+    </div>
+    <div class="hero-right">
+      <h1>Nevena<br><em>Mitrović</em></h1>  <!-- IME NA VRH DESNO -->
+      <p>I make things by hand, inspired by nature and drawn by personal interests. My engineering background is a tool in that process, not a label. I am exploring different art forms while learning how to connect technical skills with craftsmanship.</p>        <!-- TEXT ISPOD -->
+    </div>
+  </div>
+  <section id="about">
+    <div class="section-header">
+      <h2 class="section-title">About</h2>
+      <span class="section-label"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a 24 year old Electrical Engineering master’s student from Belgrade. I am looking for ways to utilize software tools for repetitive phases of handmaking processes, while preserving organic essence of creative vision. My approach to craft is patient and systematic, with great attention to details. </p>
+        <p>My work spans across jewelry, clay, textile design and printmaking. 
+      </div>
+      <div class="about-facts">
+        <div class="fact-row">
+          <div class="fact-label">Location</div>
+          <div class="fact-value">Belgrade, Serbia</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Study</div>
+          <div class="fact-value">MSc Electrical Engineering, University of Belgrade</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Digital Tools</div>
+          <div class="fact-value">Python Programming, SketchUp, Canva, Affinity, Familiar with CAD</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <div class="application-bar">
+    <div class="application-bar-inner">
+      <span>Portfolio</span>
+      <strong>Handmade work and designs • 2026</strong>
+    </div>
+  </div>
+
+  <section id="jewelry">
+    <div class="section-header">
+      <h2 class="section-title">Jewelry</h2>
+      <span class="section-label">color patterns</span>
+    </div>
+    <p class="section-desc">Jewelry has been my first art form since childhood. Currently I am working with silver clay that lets me explore precise, tactile forms that balance structure and movement.</p>
+    <div class="gallery-wrap">
+      <div class="gallery-nav prev" data-gallery="gallery-jewelry">‹</div>
+      <div class="gallery" id="gallery-jewelry">
+        <div class="gallery-item">
+          <img src="nakit.jpg" alt="Jewelry work 1">
+          <div class="gallery-caption">Silver clay piece</div>
+        </div>
+        <div class="gallery-item">
+          <img src="sunc.jpg" alt="Jewelry work 1">
+          <div class="gallery-caption">Silver clay piece</div>
+        </div>
+      <div class="gallery-nav next" data-gallery="gallery-jewelry">›</div>
+    </div>
+  </section>
+
+  <section id="clay">
+  <div class="section-header">
+    <h2 class="section-title">Clay</h2>
+    <span class="section-label">hand-shaped forms</span>
+  </div>
+  <p class="section-desc">Clay keeps a record of every pressure and correction. It's where I slow down and let organic material guide the rhythm of making.</p>
+  <div class="gallery-wrap">
+    <div class="gallery-nav prev" data-gallery="gallery-clay">‹</div>
+    <div class="gallery" id="gallery-clay">
+      <!-- SLÍKA 1 -->
+      <div class="gallery-item">
+        <img src="pticja.jpg" alt="Clay pticja">
+        <div class="gallery-caption">Chess set</div>
+      </div>
+      <!-- DODAJ JOŠ AKO TREBA -->
+      <div class="gallery-item">
+        <img src="dalje.jpg" alt="Clay opis">
+        <div class="gallery-caption"></div>
+      </div> 
+      <!-- SLÍKA 4 -->
+      <div class="gallery-item">
+        <img src="ubojiizbliza.jpg" alt="Clay ubojiizbliza">
+        <div class="gallery-caption"></div>
+      </div>
+      <!-- SLÍKA 2 -->
+      <div class="gallery-item">
+        <img src="konjicizbliza.jpg" alt="Clay konjicizbliza">
+        <div class="gallery-caption">Before glazing</div>
+      </div>
+      
+      <!-- SLÍKA 3 -->
+      <div class="gallery-item">
+        <img src="parizbl.jpg" alt="Clay parizbl">
+        <div class="gallery-caption"></div>
+      </div>
+    </div>
+    <div class="gallery-nav next" data-gallery="gallery-clay">›</div>
+  </div>
+</section>
+
+  <section id="textile">
+    <div class="section-header">
+      <h2 class="section-title">Textile</h2>
+      <span class="section-label">linocut on fabric</span>
+    </div>
+    <p class="section-desc">Linocut prints transferred to t-shirts and fabric. Repetition and layering creates the image. Every print is unique, unpredictable and permanent.</p>
+    <div class="gallery-wrap">
+      <div class="gallery-nav prev" data-gallery="gallery-textile">‹</div>
+      <div class="gallery" id="gallery-textile">
+        <div class="gallery-item">
+          <img src="marko.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Paket aranzman</div>
+        </div>
+        <div class="gallery-item">
+          <img src="parket.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Sketch and cut linoleum</div>
+        </div>
+        <div class="gallery-item">
+          <img src="mi.jpg" alt="Poster work 1">
+          <div class="gallery-caption"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="mank.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Monkey T-shirt</div>
+        </div>
+        <div class="gallery-item">
+          <img src="japok.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Tom York</div>
+        </div>
+        <div class="gallery-item">
+          <img src="crtam.jpg" alt="Poster work 1">
+          <div class="gallery-caption"></div>
+        </div>
+      </div>
+      <div class="gallery-nav next" data-gallery="gallery-textile">›</div>
+    </div>
+  </section>
+
+  <section id="posters">
+    <div class="section-header">
+      <h2 class="section-title">Posters</h2>
+      <span class="section-label">linocut prints</span>
+    </div>
+    <p class="section-desc">Linocut on paper enables more freedom and experimenting with fresh colors.</p>
+    <div class="gallery-wrap">
+      <div class="gallery-nav prev" data-gallery="gallery-posters">‹</div>
+      <div class="gallery" id="gallery-posters">
+        <div class="gallery-item">
+          <img src="sdlino.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Cut linoleum</div>
+        </div>
+        <div class="gallery-item">
+          <img src="first.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Prototype</div>
+        </div>
+        <div class="gallery-item">
+          <img src="poster.jpg" alt="Poster work 1">
+          <div class="gallery-caption">Final poster</div>
+        </div>
+      </div>
+      <div class="gallery-nav next" data-gallery="gallery-posters">›</div>
+    </div>
+  </section>
+
+  <section id="other">
+    <div class="section-header">
+      <h2 class="section-title">Other designs</h2>
+      <span class="section-label">Fabrics and Spaces</span>
+    </div>
+    <p class="section-desc">Here's some more insight into my style and designs for personal use.</p>
+    <div class="gallery-wrap">
+      <div class="gallery-nav prev" data-gallery="gallery-other">‹</div>
+      <div class="gallery" id="gallery-other">
+        <div class="gallery-item">
+          <img src="mat.jpg" alt="Other design work 1">
+          <div class="gallery-caption">Dress</div>
+        </div>
+        <div class="gallery-item">
+          <img src="haljinaizbl.jpg" alt="Other design work 1">
+          <div class="gallery-caption"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="kuh3d.jpg" alt="Other design work 1">
+          <div class="gallery-caption">Kitchen model</div>
+        </div>
+        <div class="gallery-item">
+          <img src="kuhgot.jpg" alt="Other design work 1">
+          <div class="gallery-caption">Kitchen final</div>
+        </div>
+        <div class="gallery-item">
+          <img src="pan.jpg" alt="Other design work 1">
+          <div class="gallery-caption"></div>
+        </div>
+      </div>
+      <div class="gallery-nav next" data-gallery="gallery-other">›</div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <div class="contact-heading">Let’s make something together.</div>
+      <div class="contact-right">
+        <a class="contact-email" href="mailto:nevenamitrovic007@gmail.com">nevenamitrovic007@gmail.com</a>
+        <br>
+        <a href="tel:+38162232557" class="contact-email">+381 62 232 557</a>
+        <div class="skills-note">Open to collaborations, commissions, workshops.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 Nevena Mitrović</div>
+    <div>Handmade portfolio • Beograd</div>
+  </footer>
+
+  <script>
+    const galleries = document.querySelectorAll('.gallery');
+    const navButtons = document.querySelectorAll('.gallery-nav');
+
+    // Drag funkcionalnost (stara)
+    galleries.forEach(gallery => {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      gallery.addEventListener('mousedown', (e) => {
+        isDown = true;
+        gallery.classList.add('active');
+        startX = e.pageX - gallery.offsetLeft;
+        scrollLeft = gallery.scrollLeft;
+      });
+
+      gallery.addEventListener('mouseleave', () => {
+        isDown = false;
+        gallery.classList.remove('active');
+      });
+
+      gallery.addEventListener('mouseup', () => {
+        isDown = false;
+        gallery.classList.remove('active');
+      });
+
+      gallery.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - gallery.offsetLeft;
+        const walk = (x - startX) * 2;
+        gallery.scrollLeft = scrollLeft - walk;
+      });
+
+      gallery.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - gallery.offsetLeft;
+        scrollLeft = gallery.scrollLeft;
+      }, { passive: true });
+
+      gallery.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX - gallery.offsetLeft;
+        const walk = (x - startX) * 2;
+        gallery.scrollLeft = scrollLeft - walk;
+      }, { passive: true });
+    });
+
+    // STRELICE NAVIGACIJA
+    navButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const galleryId = button.dataset.gallery;
+        const gallery = document.getElementById(galleryId);
+        const scrollAmount = gallery.clientWidth * 0.8;
+
+        if (button.classList.contains('prev')) {
+          gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+          gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        // Update button states after scroll
+        setTimeout(updateNavStates, 200);
+      });
+    });
+
+    function updateNavStates() {
+      galleries.forEach(gallery => {
+        const prevBtn = gallery.parentElement.querySelector('.prev');
+        const nextBtn = gallery.parentElement.querySelector('.next');
+
+        // Check if can scroll left/right
+        const canScrollLeft = gallery.scrollLeft > 10;
+        const canScrollRight = gallery.scrollLeft < gallery.scrollWidth - gallery.clientWidth - 10;
+
+        prevBtn.classList.toggle('disabled', !canScrollLeft);
+        nextBtn.classList.toggle('disabled', !canScrollRight);
+      });
+    }
+
+    // Initial state i scroll listener
+    setTimeout(updateNavStates, 100);
+    galleries.forEach(gallery => {
+      gallery.addEventListener('scroll', updateNavStates);
+    });
+  </script>
+</body>
+</html>
